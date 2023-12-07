@@ -73,6 +73,12 @@ def registerUser(request):
 
     return render(request, 'base/login-register.html', context)
 
+
+def reset_password(request):
+    context = {}
+    return render(request, 'base/reset-password.html.', context)
+
+
 def home(request):
     q = request.GET.get('q')
     # rooms = Room.objects.all()
