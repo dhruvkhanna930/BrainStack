@@ -142,3 +142,12 @@ MEDIA_ROOT = BASE_DIR / 'static/images'  #where does the user uploaded content g
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# SMTP Server Details 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'brainstack'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True  # Use TLS/SSL for secure connections
+EMAIL_HOST_USER = 'brainstack930@gmail.com' 
+EMAIL_HOST_PASSWORD = 'tusfmxqddalmwykt' 

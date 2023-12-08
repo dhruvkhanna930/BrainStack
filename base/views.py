@@ -9,13 +9,19 @@ from django.http import HttpResponse
 from django.db.models import Q  #Q for multiple matches when searching
 
 from .models import Room, Topic, Message, User
-from .forms import RoomForm, MessageForm, UserForm, MyUserCreationForm
+from .forms import RoomForm, MessageForm, UserForm, MyUserCreationForm, ChangePasswordForm
+
+import random
+from django.conf import settings
+from .email import resetPasswordMail
 
 # rooms = [
 #     {'id':1, 'name': 'Python'},
 #     {'id':2, 'name': 'JavaScript'},
 #     {'id':3, 'name': 'Swift'}
 # ]
+
+otp = 0
 
 def loginUser(request):
     page = "login"
@@ -74,9 +80,67 @@ def registerUser(request):
     return render(request, 'base/login-register.html', context)
 
 
-def reset_password(request):
+ForgotPasswordUser = User.objects.get(id = 1)
+def forgot_password(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        try:
+            global ForgotPasswordUser
+            ForgotPasswordUser = User.objects.get(email=email)
+        except:
+            messages.error(request, "User with entered email doesn't exist")
+            return redirect('forgot-password')
+
+        if ForgotPasswordUser is not None:
+            return redirect('sendotp')
     context = {}
-    return render(request, 'base/reset-password.html.', context)
+    return render(request, 'base/forgot-password.html', context)
+
+
+def sendotp(request):
+    global otp 
+    otp = random.randint(100000, 999999)
+    # to = request.user.email
+    
+    print(otp)
+    # resetPasswordMail(settings.EMAIL_HOST, settings.EMAIL_PORT, settings.EMAIL_HOST_USER, settings.EMAIL_HOST_PASSWORD, to, otp, request.user.username )
+    return redirect('email-verification')
+
+
+def email_verification(request):
+    context = {}
+    if request.method == 'POST':
+        user_otp = request.POST.get('otp')
+        try:
+            user_otp = int(request.POST.get('otp'))
+        except:
+            messages.error(request, "Enter valid numeric OTP")
+            return redirect('email-verification')
+
+        if user_otp == otp:
+            return redirect('reset-password')
+        else:
+            messages.error(request, "OTP didn't match, enter again")
+            return redirect('email-verification')
+    return render(request, 'base/email-verification.html', context)
+
+
+def reset_password(request):
+    if request.method == 'POST':
+        form = ChangePasswordForm(request.POST)
+        if form.is_valid():
+            ForgotPasswordUser.set_password(form.cleaned_data['new_password'])
+            ForgotPasswordUser.save()
+            login(request, ForgotPasswordUser)
+            return redirect('login')
+
+    else:
+        form = ChangePasswordForm()
+    context = {
+        'user' : ForgotPasswordUser,
+        'form' : form
+    }
+    return render(request, 'base/reset-password.html', context)
 
 
 def home(request):

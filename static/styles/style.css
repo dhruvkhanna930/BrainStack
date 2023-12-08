@@ -846,12 +846,14 @@ a {
 }
 
 .forgot-password{
+  color: var(--color-light);
   transition: all 0.1s ease-in-out;
   user-select: none;
   font-size: x-small;
   margin-top: -1%;
   margin-bottom: 3%;
   cursor: default;
+
 }
 
 .forgot-password:hover{
