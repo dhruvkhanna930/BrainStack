@@ -1,7 +1,6 @@
 
 
-def resetPasswordMail(EMAIL_HOST, EMAIL_PORT, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, TO_, OTP, USER): 
-    import pandas as pd
+def resetPasswordMail(EMAIL_HOST, EMAIL_PORT, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, TO_, OTP, USER):
     import smtplib as sm
     from email import encoders
     from email.mime.multipart import MIMEMultipart
