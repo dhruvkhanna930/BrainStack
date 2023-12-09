@@ -20,12 +20,12 @@ def resetPasswordMail(EMAIL_HOST, EMAIL_PORT, EMAIL_HOST_USER, EMAIL_HOST_PASSWO
         message["To"] = TO_
 
         html = f'''
-            <div class="wrapper" style="margin: auto; margin-top: 3rem; width: 60%; border: 2px solid gray; background-color: aliceblue;">
+            <div class="wrapper" style="margin: auto; margin-top: 3rem; width: 40%; border: 2px solid gray; background-color: rgba(248, 249, 250, 0.626);">
                 <h2 style="text-align: center;">Reset your BrainStack Password</h2>
-                <div style="margin: auto; width: 80%;">
+                <div style="margin: auto; width: 80%; background-color: aliceblue; padding: 1rem; margin-bottom: 2rem;">
                     Dear User, <br>
                     Your user id is <span style="font-size: larger;"> {USER} </span> <br>
-                    OTP in order to reset your password is <b style="font-size: x-large;">{OTP}</b>
+                    OTP in order to reset your password is <b style="font-size: larger;">{OTP}</b>
                 </div>
             </div>
         '''
