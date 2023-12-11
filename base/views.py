@@ -103,7 +103,7 @@ def sendotp(request):
     to = ForgotPasswordUser.email
     
     print(otp)
-    resetPasswordMail(settings.EMAIL_HOST, settings.EMAIL_PORT, settings.EMAIL_HOST_USER, settings.EMAIL_HOST_PASSWORD, to, otp, request.user.username )
+    resetPasswordMail(settings.EMAIL_HOST, settings.EMAIL_PORT, settings.EMAIL_HOST_USER, settings.EMAIL_HOST_PASSWORD, to, otp, ForgotPasswordUser.username )
     return redirect('email-verification')
 
 
