@@ -1,157 +1,66 @@
-{% extends 'main.html' %}
-
-{% block chatbox %}
-<style>
-    body, html {
-      height: 100%;
-    }
-
-    .messages-box {
-      flex: 1;
-      overflow-y: auto;
-    }
-
-    .messages-list {
-      padding-left: 0;
-    }
-
-    .message {
-      margin-bottom: 15px;
-      list-style: none;
-    }
-
-    .message-text {
-      padding: 10px;
-      border-radius: 5px;
-    }
-
-    .sent {
-      background-color: #dcf8c6;
-      align-self: flex-end;
-    }
-
-    .received {
-      background-color: #f1f0f0;
-      align-self: flex-start;
-    }
-
-    .message-form {
-      display: flex;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 10px;
-      background-color: #f8f9fa;
-    }
-
-    .message-input {
-      flex: 1;
-      border-radius: 0;
-      border-right: none;
-    }
-
-    .btn-send {
-      border-radius: 0;
-    }
-
-    .chat-container {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-    }
-</style>
-
-<div class="chat-container">
-    <div class="card flex-grow-1">
-      <div class="card-header bg-primary text-white">Chat</div>
-      <div class="card-body messages-box">
-        
-        <ul class="list-unstyled messages-list">
-          
-          <li class="message received">
-            <div class="message-text">
-              <div class="message-sender">
-                <b>AI Chatbot</b>
-              </div>
-              <div class="message-content">
-                Hi, I am your AI Chatbot, you can ask me anything.
-              </div>
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'styles/chatbot_css/chat.css' %}">
+    <title>Chatbox</title>
+</head>
+<body>
+    <div class="cahtbox-container">
+        <div class="chatbox">
+            <div class="chatbox__support">
+                <div class="chatbox__header">
+                    <div class="chatbox__image--header">
+                        <img src="{% static 'images/chatbotIcon.png' %}" alt="image">
+                    </div>
+                    <div class="chatbox__content--header">
+                        <h4 class="chatbox__heading--header">Brain Bot</h4>
+                        <p class="chatbox__description--header">Your intelligent virtual assistant for seamless communication.</p>
+                    </div>
+                </div>
+                <div class="chatbox__messages">
+                    <ul class="chat-bg">
+                        <li class="messages__item messages__item--visitor">
+                            <div class="message-text">
+                                <div class="message-sender">
+                                  <b>Brain Bot</b>
+                                </div>
+                                <div class="message-content">
+                                  Hi, I am your AI Chatbot, you can ask me anything.
+                                </div>
+                              </div>
+                        </li>
+                    
+                        
+                        <div class="messages__item messages__item--typing">
+                            <span class="messages__dot"></span>
+                            <span class="messages__dot"></span>
+                            <span class="messages__dot"></span>
+                        </div>
+                    </ul>
+                </div>
+                <div class="chatbox__footer">
+                    <form class="message-form">
+                        {%csrf_token%}
+                        <div class="input-group">
+                            <input type="text" class="form-control message-input" placeholder="Type your message...">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-primary btn-send chatbox__send--footer">Send</button>
+                            </div>
+                        </div>
+                      </form>
+                </div>
             </div>
-          </li>
-        </ul>
-        
-      </div>
-      <br><br>
-      <br><br>
-      <br><br>
+            <div class="chatbox__button">
+                <button>button</button>
+            </div>
+        </div>
     </div>
-    <form class="message-form">
-      {%csrf_token%}
-      <div class="input-group">
-        <input type="text" class="form-control message-input" placeholder="Type your message...">
-        <div class="input-group-append">
-          <button type="submit" class="btn btn-primary btn-send">Send</button>
-        </div>
-      </div>
-    </form>
-</div>
-  
-
-<script>
-  const messagesList = document.querySelector('.messages-list');
-  const messageForm = document.querySelector('.message-form');
-  const messageInput = document.querySelector('.message-input');
-
-  messageForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-
-    const message = messageInput.value.trim();
-    if (message.length === 0) {
-      return;
-    }
-
-    const messageItem = document.createElement('li');
-    messageItem.classList.add('message', 'sent');
-    messageItem.innerHTML = `
-        <div class="message-text">
-            <div class="message-sender">
-                <b>You</b>
-            </div>
-            <div class="message-content">
-                ${message}
-            </div>
-        </div>`;
-    messagesList.appendChild(messageItem);
-
-    messageInput.value = '';
-
-    fetch('', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({
-        'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value,
-        'message': message
-      })
-    })
-      .then(response => response.json())
-      .then(data => {
-        const response = data.response;
-        const messageItem = document.createElement('li');
-        messageItem.classList.add('message', 'received');
-        messageItem.innerHTML = `
-        <div class="message-text">
-            <div class="message-sender">
-              <b>AI Chatbot</b>
-            </div>
-            <div class="message-content">
-                ${response}
-            </div>
-        </div>
-          `;
-        messagesList.appendChild(messageItem);
-      });
-  });
-
-</script>
-{% endblock %}
+    <script src="{% static 'js/chatbot_js/Chat.js'%}"></script>
+    <script src="{% static 'js/chatbot_js/app.js'%}"></script>
+    <script src="{% static 'js/chatbot_js/main.js'%}"></script>
+</body>
+</html>
