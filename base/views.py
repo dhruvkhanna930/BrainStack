@@ -157,10 +157,10 @@ def home(request):
         )  #i here makes it case insensitive
         room_messages = Message.objects.filter(
             Q(room__topic__name__icontains = q)
-        )
+        )[0:4]
     else:
         rooms = Room.objects.all()
-        room_messages = Message.objects.all( )[0:5]
+        room_messages = Message.objects.all( )[0:4]
     topics = Topic.objects.all()[0:5]
     room_count = rooms.count()  # .count method works faster than the len() method
     
