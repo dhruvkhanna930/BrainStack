@@ -1,0 +1,28 @@
+<div class="activities">
+    <div class="activities__header">
+    <h2>Top Hosts</h2>
+    </div>
+
+    {% for host in top_hosts %}
+        <div class="activities__box">
+        <div class="activities__boxHeader roomListRoom__header tophostsection">
+            <a href="{% url 'user-profile' host.id %}" class="roomListRoom__author">
+                <div class="avatar avatar--small">
+                    <img src="{{ host.avatar.url }}" />
+                </div> 
+                <div>
+                    <div class="tophostname">{{ host.name }}</div>
+                    <div class="tophostusername">@{{host.username}}</div>  
+                </div>
+                      
+           </a>
+
+        </div>
+        </div>
+    {% endfor %}
+</div>
+
+
+
+
+
