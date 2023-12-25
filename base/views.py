@@ -15,6 +15,8 @@ import random
 from django.conf import settings
 from .email import resetPasswordMail
 
+from django.db.models import Count
+
 # rooms = [
 #     {'id':1, 'name': 'Python'},
 #     {'id':2, 'name': 'JavaScript'},
@@ -158,12 +160,15 @@ def home(request):
         room_messages = Message.objects.filter(
             Q(room__topic__name__icontains = q)
         )[0:4]
+
     else:
         rooms = Room.objects.all()
         room_messages = Message.objects.all( )[0:4]
     topics = Topic.objects.all()[0:5]
     room_count = rooms.count()  # .count method works faster than the len() method
     
+    top_hosts = User.objects.annotate(num_rooms=Count('room__host')).order_by('-num_rooms')[:5]
+
     total_rooms = Room.objects.all().count()
     # hosts = 
 
@@ -172,7 +177,8 @@ def home(request):
         'room_count' : room_count,
         'topics' : topics,
         'room_messages' : room_messages,
-        'total_rooms' : total_rooms
+        'total_rooms' : total_rooms,
+        'top_hosts' : top_hosts
     }
     return render(request, 'base/home.html', context)
 
