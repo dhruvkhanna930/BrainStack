@@ -17,13 +17,48 @@ from .email import resetPasswordMail
 
 from django.db.models import Count
 
-# rooms = [
-#     {'id':1, 'name': 'Python'},
-#     {'id':2, 'name': 'JavaScript'},
-#     {'id':3, 'name': 'Swift'}
-# ]
+from django.http import JsonResponse
+import google.generativeai as palm
+import os
+from dotenv import load_dotenv
+
+# Setting up the palmAPIServer
+load_dotenv()
+try:
+    api_key_env = os.environ['CHATBOT_API_KEY']
+    palm.configure(api_key=api_key_env)
+except KeyError:
+    raise ValueError("CHATBOT_API_KEY is not set in the environment variables.")
+
+def chatbot_v2(request):
+        message = request.POST.get('message')
+
+        defaults = {
+        'model': 'models/chat-bison-001',
+        'temperature': 0.25,
+        'candidate_count': 1,
+        'top_k': 40,
+        'top_p': 0.95,
+        }
+        prompt = message
+        context = "Speak like a helper"
+        examples = []
+
+        try:
+            response = palm.chat(
+            **defaults,
+            messages=prompt,
+            context=context,
+            examples=examples,
+            )
+            return response.last
+        except Exception as e:
+            # Handle potential errors during chatbot interaction
+            return f"Error interacting with the chatbot: {str(e)}"
+        
 
 otp = 0
+
 
 def loginUser(request):
     page = "login"
@@ -180,6 +215,16 @@ def home(request):
         'total_rooms' : total_rooms,
         'top_hosts' : top_hosts
     }
+
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            print("Yes")
+            response = chatbot_v2(request)
+        else:
+            print("No")
+            response = "Login/SignUp to BrainsStack first to use BrainBot"
+        return JsonResponse({'response':response})
+
     return render(request, 'base/home.html', context)
 
 def room(request,pk):
