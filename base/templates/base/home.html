@@ -1,5 +1,6 @@
 {% extends 'main.html' %}
 
+{% load static %}
 {% block content %}
 <main class="layout layout--3">
     <div class="container">
@@ -8,49 +9,107 @@
     <!-- Topics End -->
 
     <!-- Room List Start -->
-    <div class="roomList">
-        <div class="mobile-menu">
-        <form class="header__search" method="GET" action="{% url 'home' %}">
-            <label>
-            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-                <title>search</title>
+        <div class="roomList">
+            <div class="mobile-menu">
+            <form class="header__search" method="GET" action="{% url 'home' %}">
+                <label>
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                    <title>search</title>
+                    <path
+                    d="M32 30.586l-10.845-10.845c1.771-2.092 2.845-4.791 2.845-7.741 0-6.617-5.383-12-12-12s-12 5.383-12 12c0 6.617 5.383 12 12 12 2.949 0 5.649-1.074 7.741-2.845l10.845 10.845 1.414-1.414zM12 22c-5.514 0-10-4.486-10-10s4.486-10 10-10c5.514 0 10 4.486 10 10s-4.486 10-10 10z"
+                    ></path>
+                </svg>
+                <input placeholder="Search for posts" name="q" />
+                </label>
+            </form>
+            <div class="mobile-menuItems">
+                <a class="btn btn--main btn--pill" href="{% url 'topics' %}">Browse Topics</a>
+                <a class="btn btn--main btn--pill" href="{% url 'activity' %}">Recent Activities</a>
+            </div>
+            </div>
+            <div class="roomList__header">
+            <div>
+                <h2>Study Room</h2>
+                <p>{{ room_count }} Rooms available</p>
+            </div>
+            <a class="btn btn--main" href="{% url 'create-room' %}">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                <title>add</title>
                 <path
-                d="M32 30.586l-10.845-10.845c1.771-2.092 2.845-4.791 2.845-7.741 0-6.617-5.383-12-12-12s-12 5.383-12 12c0 6.617 5.383 12 12 12 2.949 0 5.649-1.074 7.741-2.845l10.845 10.845 1.414-1.414zM12 22c-5.514 0-10-4.486-10-10s4.486-10 10-10c5.514 0 10 4.486 10 10s-4.486 10-10 10z"
+                    d="M16.943 0.943h-1.885v14.115h-14.115v1.885h14.115v14.115h1.885v-14.115h14.115v-1.885h-14.115v-14.115z"
                 ></path>
-            </svg>
-            <input placeholder="Search for posts" name="q" />
-            </label>
-        </form>
-        <div class="mobile-menuItems">
-            <a class="btn btn--main btn--pill" href="{% url 'topics' %}">Browse Topics</a>
-            <a class="btn btn--main btn--pill" href="{% url 'activity' %}">Recent Activities</a>
-        </div>
-        </div>
-        <div class="roomList__header">
-        <div>
-            <h2>Study Room</h2>
-            <p>{{ room_count }} Rooms available</p>
-        </div>
-        <a class="btn btn--main" href="{% url 'create-room' %}">
-            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-            <title>add</title>
-            <path
-                d="M16.943 0.943h-1.885v14.115h-14.115v1.885h14.115v14.115h1.885v-14.115h14.115v-1.885h-14.115v-14.115z"
-            ></path>
-            </svg>
-            Create Room
-        </a>
-        </div>
+                </svg>
+                Create Room
+            </a>
+            </div>
 
-        {% include 'base/feed_component.html' %}
+            {% include 'base/feed_component.html' %}
 
-    </div>
+        </div>
     <!-- Room List End -->
 
-    <!-- Activities Start -->
-    {% include 'base/activity_component.html' %}
-    <!-- Activities End -->
+    <!-- Activities and TopHosts Start -->
+    <div>
+        {% include 'base/tophosts_component.html' %}
+        <br>
+        {% include 'base/activity_component.html' %}
     </div>
+    
+    <!-- Activities and TopHosts End -->
+    </div>
+
+    <!-- Chatbox Start -->
+    <div class="cahtbox-container">
+        <div class="chatbox">
+            <div class="chatbox__support">
+                <div class="chatbox__header">
+                    <div class="chatbox__image--header">
+                        <img src="{% static 'images/chatbotIcon.png' %}" alt="image">
+                    </div>
+                    <div class="chatbox__content--header">
+                        <h4 class="chatbox__heading--header">Brain Bot</h4>
+                        <p class="chatbox__description--header">Your intelligent virtual assistant for seamless communication.</p>
+                    </div>
+                </div>
+                <div class="chatbox__messages">
+                    <ul class="chat-bg">
+                        <li class="messages__item messages__item--visitor">
+                            <div class="message-text">
+                                <div class="message-sender">
+                                    <b>Brain Bot</b>
+                                </div>
+                                <div class="message-content">
+                                    Hi, I am your AI Chatbot, you can ask me anything.
+                                </div>
+                                </div>
+                        </li>
+                    
+                        
+                        <div class="messages__item messages__item--typing">
+                            <span class="messages__dot"></span>
+                            <span class="messages__dot"></span>
+                            <span class="messages__dot"></span>
+                        </div>
+                    </ul>
+                </div>
+                <div class="chatbox__footer">
+                    <form class="message-form">
+                        {%csrf_token%}
+                        <div class="input-group">
+                            <input type="text" class="form-control message-input" placeholder="Type your message...">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-primary btn-send chatbox__send--footer">Send</button>
+                            </div>
+                        </div>
+                        </form>
+                </div>
+            </div>
+            <div class="chatbox__button">
+                <button>button</button>
+            </div>
+        </div>
+    </div>
+    <!-- Chatbox End -->
 </main>
 {% endblock content %}
 

@@ -14,6 +14,9 @@ class User(AbstractUser):
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []
 
+    def total_hosted_rooms(self):
+        return Room.objects.filter(host=self).count()
+
 
 
 class Topic(models.Model):

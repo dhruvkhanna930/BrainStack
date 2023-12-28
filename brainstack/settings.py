@@ -151,3 +151,6 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True  # Use TLS/SSL for secure connections
 EMAIL_HOST_USER = 'brainstack930@gmail.com' 
 EMAIL_HOST_PASSWORD = 'tusfmxqddalmwykt' 
+
+BARD_API_URL = "https://api.bard.co/v2"
+BARD_API_KEY = "eAjL4pvA0jR4umFLkDR8UvEl8TXM3v-dCg3j_KpDo5z7jTkQdIBFGSdJHz9B32zaHGIW8A"

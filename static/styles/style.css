@@ -1191,3 +1191,16 @@ a {
   color: var(--color-main);
   font-weight: 1.4rem;
 }
+
+
+/* extra added */
+
+.tophostname {
+  color: var(--color-light);
+  margin-bottom: 0%;
+  font-size: medium;
+}
+
+.tophostusername{
+  font-size: smaller;
+}

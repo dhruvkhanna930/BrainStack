@@ -1,0 +1,92 @@
+<!-- chat/templates/chat/chatbox.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with Bot</title>
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <!-- Include your chatbox CSS here -->
+    <link rel="stylesheet" href="{% static 'chat/chatbox.css' %}">
+    <style>
+        /* chat/static/chat/chatbox.css */
+        .chatbox {
+            width: 300px;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .chatbox-header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .chatbox-content {
+            max-height: 200px;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .chatbox-input {
+            padding: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .chatbox-input input {
+            flex-grow: 1;
+            padding: 5px;
+        }
+
+        .chatbox-input button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="chatbox">
+        <div class="chatbox-header">
+            <h2>Chat with Bot</h2>
+        </div>
+        <div class="chatbox-content" id="chatbox-content">
+            <!-- Chat messages will be displayed here -->
+        </div>
+        <div class="chatbox-input">
+            <input type="text" id="user-input" placeholder="Type a message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+<script>
+    function sendMessage() {
+        var userMessage = $('#user-input').val();
+        $('#chatbox-content').append('<div class="user-message">' + userMessage + '</div>');
+
+        // Send user message to Django backend
+        $.post('/chat/chat-with-bot/', {message: userMessage}, function(data) {
+            var botReply = data.bot_reply;
+            $('#chatbox-content').append('<div class="bot-message">' + botReply + '</div>');
+        });
+
+        // Clear user input
+        $('#user-input').val('');
+    }
+</script>
+
+</body>
+</html>
