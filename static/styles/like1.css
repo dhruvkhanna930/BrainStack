@@ -1,0 +1,33 @@
+
+.block .heart-icon {
+  width: 20px;
+  height: 15px;
+  user-select: none;
+  margin-top: 5px;
+  /* position: absolute; */
+  /* left: 20%; */
+  /* top: 53% */
+  transform: translate(-20%, -50%);
+  fill: transparent;
+  transition: transform 0.25s ease-out;
+  transform-origin: 50% 50%;
+  margin-bottom: -20px;
+  margin-left: 2px;
+}
+
+/* initial state of the like heart button */
+.block .heart-icon .fill-color-shape {
+  fill: transparent;
+}
+.block .heart-icon.isLiked {
+  filter: drop-shadow(0 3px 5px #c44133);
+}
+
+/* "liked" state of the like heart button */
+.block .heart-icon.isLiked .fill-color-shape {
+  transition: fill 0.5s linear;
+  fill: #e74c3c;
+}
+.block .heart-icon:hover {
+  transform: translate(-20%, calc(-50% - 3px)) scale(1.03);
+}

@@ -1204,3 +1204,16 @@ a {
 .tophostusername{
   font-size: smaller;
 }
+
+/* heart icon  */
+
+.like-unlike-btn {
+  width: 30px;
+  height: 500px;
+  background-color: #5dd693;
+  /* background: transparent; */
+}
+
+.total__likes{
+  color: var(--color-success);
+}

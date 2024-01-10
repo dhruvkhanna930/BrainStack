@@ -43,14 +43,31 @@ class Room(models.Model):
     
 
 class Message(models.Model):
-    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    user = models.ForeignKey(User, on_delete = models.CASCADE, related_name='user')
     room = models.ForeignKey(Room, on_delete = models.CASCADE)  #models.CASCADE deletes the messages upon deletion of the Room
     body = models.TextField()
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 
+    # likes = models.IntegerField(default = 0)
+    liked = models.ManyToManyField(User, default=True, blank=True, related_name='liked')
+
     def __str__(self):
         return self.body[0:50]
     
+    @property
+    def num_likes(self):
+        return self.liked.all().count()
+    
     class Meta:
         ordering = ['-created', '-updated']
+
+LIKE_CHOICES = (
+    ('Like', 'Like'),
+    ('Unlike', 'Unlike')
+)
+
+class Likes(models.Model):
+    user = models.ForeignKey(User, on_delete = models.CASCADE, related_name = 'user_likes')
+    message = models.ForeignKey(Message, on_delete=models.CASCADE, related_name='message_likes')
+    value = models.CharField(choices = LIKE_CHOICES, default = 'Like', max_length = 10)

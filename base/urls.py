@@ -23,4 +23,6 @@ urlpatterns = [
     
     path('topics/', views.topicsPage, name="topics"),
     path('activity/', views.activityPage, name="activity"),
+    path('reactMessage/<str:message_pk>', views.reactMessage, name = "react-message"),
+    # path('reactMessage/', views.reactMessage, name = "react-message"),
 ]

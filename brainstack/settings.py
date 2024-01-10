@@ -131,7 +131,7 @@ MEDIA_URL = '/images/'
 
 
 STATICFILES_DIRS = [    #static files   
-    BASE_DIR / 'static' ,
+    BASE_DIR / "static" ,
 ]
 
 MEDIA_ROOT = BASE_DIR / 'static/images'  #where does the user uploaded content go to

@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.urls import reverse
 
 # from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
@@ -8,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.db.models import Q  #Q for multiple matches when searching
 
-from .models import Room, Topic, Message, User
+from .models import Room, Topic, Message, User, Likes
 from .forms import RoomForm, MessageForm, UserForm, MyUserCreationForm, ChangePasswordForm
 
 import random
@@ -231,6 +232,7 @@ def room(request,pk):
     room = Room.objects.get(id=int(pk))
     room_messages = room.message_set.all().order_by('-created')  # message model(child) from room model, set of all messages || order by created time descending( - )
     participants = room.participants.all()
+
     if request.method == 'POST':
         message = Message.objects.create(
             user = request.user,
@@ -239,6 +241,8 @@ def room(request,pk):
         )
         room.participants.add(request.user) #to add new participants who are mesaaging 
         return redirect('room', pk=room.id)  #we are doing this beacuse now a get request is generated instead of POST request(if we dont add redirect) which will mess up some functionalities
+
+    # if request.user in 
 
     context = {
         'room': room,
@@ -426,3 +430,26 @@ def activityPage(request):
         'room_messages' : room_messages
     }
     return render(request, 'base/activity.html', context)
+
+@login_required(login_url='login')
+def reactMessage(request, message_pk):
+    user = request.user
+    message = Message.objects.get(id=message_pk)
+
+    if request.method == 'POST':
+        if user in message.liked.all():
+            message.liked.remove(user)
+        else:
+            message.liked.add(user)
+        
+        like, created = Likes.objects.get_or_create(user=user, message=message)
+
+        if not created:
+            if like.value == 'Like':
+                like.value = 'Unlike'
+            else:
+                like.value = 'Like'
+        like.save()
+
+    return redirect('room', pk=message.room.id)
+         

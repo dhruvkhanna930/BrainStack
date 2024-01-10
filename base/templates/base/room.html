@@ -1,6 +1,9 @@
 {% extends 'main.html' %}
+{% load static %}
 
 {% block content %}
+
+<link rel="stylesheet" href="{% static 'styles/style.css' %}" />
 
   <main class="profile-page layout layout--2">
     <div class="container">
@@ -110,6 +113,7 @@
                     <span class="thread__date">{{ message.created|timesince }} ago</span>
                   </div>
 
+
                   {% if request.user == message.user %}
                   <a href="{% url 'delete-message' message.id %}">
                     <div class="thread__delete">
@@ -125,7 +129,33 @@
 
                 </div>
                 <div class="thread__details">
-                  {{ message.body }}
+                    {{ message.body }}
+
+                    {% if request.user is not  is_authenticated %}
+                    <form action="{% url 'react-message' message.id %}" method="POST">
+                      {% csrf_token %}
+                      <input type="hidden" name="messgae_id" value="{{message.id}}">
+                      {% if user not in message.liked.all %}
+                        <button type="submit" class="like-unlike-btn" style="background-color: transparent; border: none;">
+                          <i class="fa-regular fa-heart fa-lg" style="color: #b80d0d;"></i>
+                          
+                        </button>
+                      {% else %}
+                        <button type="submit" class="like-unlike-btn" style="background-color: transparent; border: none;">
+                          <i class="fa-solid fa-heart fa-beat fa-lg" style="color: #b80d0d;"></i>
+                        </button>
+                      {% endif %}
+                    </form>
+                    {% endif %}
+                  
+                    <p>
+                      {{ message.liked.all.count }}
+                      {% if message.liked.all.count == 1 %}
+                        like
+                      {% else %}
+                        likes
+                      {% endif %}
+                    </p>
                 </div>
               </div>
               {% endfor %}
@@ -166,6 +196,5 @@
       <!--  End -->
     </div>
   </main>
-  <script src="script.js"></script>
-
+  
  {% endblock content %}
