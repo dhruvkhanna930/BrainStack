@@ -1206,12 +1206,9 @@ a {
 }
 
 /* heart icon  */
-
 .like-unlike-btn {
-  width: 30px;
-  height: 500px;
   background-color: #5dd693;
-  /* background: transparent; */
+  background: transparent;
 }
 
 .total__likes{

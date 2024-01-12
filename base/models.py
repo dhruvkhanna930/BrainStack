@@ -43,7 +43,7 @@ class Room(models.Model):
     
 
 class Message(models.Model):
-    user = models.ForeignKey(User, on_delete = models.CASCADE, related_name='user')
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
     room = models.ForeignKey(Room, on_delete = models.CASCADE)  #models.CASCADE deletes the messages upon deletion of the Room
     body = models.TextField()
     updated = models.DateTimeField(auto_now=True)

@@ -255,7 +255,7 @@ def room(request,pk):
 def user_profile(request, pk):
     user = User.objects.get(id=pk)
     rooms = user.room_set.all()
-    room_messages = user.message_set.all()
+    room_messages = user.message_set.all()[0:5]
     topics = Topic.objects.all()
     total_rooms = Room.objects.all().count()
 
@@ -381,7 +381,7 @@ def delete_message(request, pk):
 
     if request.method == 'POST':
         message.delete()
-        return redirect('home')
+        return redirect('room', pk=message.room.id)
     context = {
         'obj' : message,
         'type' : type

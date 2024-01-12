@@ -136,12 +136,12 @@
                       {% csrf_token %}
                       <input type="hidden" name="messgae_id" value="{{message.id}}">
                       {% if user not in message.liked.all %}
-                        <button type="submit" class="like-unlike-btn" style="background-color: transparent; border: none;">
+                        <button type="submit" class="like-unlike-btn" style="background-color: transparent; border: none; height: 0px;">
                           <i class="fa-regular fa-heart fa-lg" style="color: #b80d0d;"></i>
                           
                         </button>
                       {% else %}
-                        <button type="submit" class="like-unlike-btn" style="background-color: transparent; border: none;">
+                        <button type="submit" class="like-unlike-btn" style="background-color: transparent; border: none; height: 0px;">
                           <i class="fa-solid fa-heart fa-beat fa-lg" style="color: #b80d0d;"></i>
                         </button>
                       {% endif %}
