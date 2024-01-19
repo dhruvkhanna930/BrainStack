@@ -1,0 +1,32 @@
+{% extends 'main2.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'styles/vc_css/brainnest.css' %}" />
+<main>
+   <section id="room-name-wrapper">
+      <p><b>Room Name:</b> <span id="room-name"  style="color: #71c6dd;"></span></p>
+   </section>
+
+   <section id="video-streams"> </section>
+
+   <section id="controls-wrapper">
+      <div class="icon-wrapper">
+          <img class="control-icon" id="mic-btn" src="{% static 'images/icons/videoroom/microphone.svg' %}" />
+      </div>
+
+      <div class="icon-wrapper">
+          <img class="control-icon" id="camera-btn" src="{% static 'images/icons/videoroom/video.svg' %}" />
+      </div>
+
+      <div class="icon-wrapper">
+          <img class="control-icon" id="leave-btn" src="{% static 'images/icons/videoroom/leave.svg' %}" />
+      </div>
+  </section>
+
+</main>
+<script type="text/javascript" src="{% static 'js/vc_js/AgoraRTC_N-4.20.0.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/vc_js/stream.js' %}"></script>
+
+{% endblock content %}
+

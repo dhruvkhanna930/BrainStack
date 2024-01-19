@@ -2,6 +2,7 @@
 
 {% load static %}
 {% block content %}
+<link rel="stylesheet" href="{% static 'styles/chatbot_css/chat.css' %}">
 <main class="layout layout--3">
     <div class="container">
     <!-- Topics Start -->
@@ -111,5 +112,10 @@
     </div>
     <!-- Chatbox End -->
 </main>
+
+<script src="{% static 'js/chatbot_js/Chat.js' %}"></script>
+<script src="{% static 'js/chatbot_js/main.js' %}"></script>
+<script src="{% static 'js/chatbot_js/app.js' %}"></script>
+
 {% endblock content %}
 
