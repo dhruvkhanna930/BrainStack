@@ -3,6 +3,7 @@
 {% load static %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'styles/chatbot_css/chat.css' %}">
+<link rel="stylesheet" href="{% static 'styles/corner_bt.css' %}">
 <main class="layout layout--3">
     <div class="container">
     <!-- Topics Start -->
@@ -102,7 +103,7 @@
                                 <button type="submit" class="btn btn-primary btn-send chatbox__send--footer">Send</button>
                             </div>
                         </div>
-                        </form>
+                    </form>
                 </div>
             </div>
             <div class="chatbox__button">
@@ -111,6 +112,24 @@
         </div>
     </div>
     <!-- Chatbox End -->
+    <div>
+            <a class="round-button" href="{% url 'bn-lobby' %}" id="btn-1">
+                <img src="{% static 'images/icons/video-icon.png' %}" alt="Button Image" id="brainroom-img">
+                <span id="btn-1-text">BrainRoom</span>
+            </a>
+        
+    
+        <a href="#" class="round-button" id="btn-2">
+        <img src="{% static 'images/icons/share-icon.png' %}" alt="Button Image" id="brainroom-img">
+        <span id="btn-2-text">BrainShare</span>
+        </a>
+
+        <form action="{% url 'bn-lobby' %}">
+            <button type="submit">
+                hello
+            </button>
+        </form>
+    </div>
 </main>
 
 <script src="{% static 'js/chatbot_js/Chat.js' %}"></script>
