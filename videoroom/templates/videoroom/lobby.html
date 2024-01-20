@@ -1,0 +1,73 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'styles/vc_css/brainnest.css' %}" />
+
+<main>
+    <div class="container">
+        <div class="layout__box">
+          <div class="layout__boxHeader">
+            <div class="layout__boxTitle">
+              <a href="{% url 'home' %}">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                  <title>arrow-left</title>
+                  <path
+                    d="M13.723 2.286l-13.723 13.714 13.719 13.714 1.616-1.611-10.96-10.96h27.625v-2.286h-27.625l10.965-10.965-1.616-1.607z">
+                  </path>
+                </svg>
+              </a>
+              <h3>
+                Brain Room
+              </h3>
+            </div>
+          </div>
+          <div class="layout__body">
+
+            <form class="form" id="brainnest-form">
+              <div class="form__group logo" style="text-align: center;">
+                <img id="logo" src="{% static 'images/icons/videoroom/chat-icon.png' %}" style="width: 50%;"/>
+              </div>
+
+              <div class="form__group">
+                <label>ROOM:</label>
+                <input name="room" placeholder="Enter a room name..."  style="text-transform:uppercase"/>
+              </div>
+      
+              <div class="form__action">
+                <a class="btn btn--dark" href="{{request.META.HTTP_REFERER}}">Cancel</a>
+                <input class="btn btn--main" type="submit" value="Join Stream">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+</main>
+
+<script>
+    let form = document.getElementById('brainnest-form')
+
+    let handleSubmit = async (e) => {
+        e.preventDefault()
+        let room = e.target.room.value.toUpperCase()
+
+        let response = await fetch(`/brainnest/get_token/?channel=${room}`)
+        let data = await response.json()
+
+        let UID = data.uid
+        let token = data.token
+        let name = data.currentUser
+        console.log(name)
+
+        sessionStorage.setItem('UID', UID)
+        sessionStorage.setItem('token', token)
+        sessionStorage.setItem('room', room)
+        sessionStorage.setItem('name', name)
+
+        window.open('/brainnest/room/', '_self')
+    }
+
+    form.addEventListener('submit', handleSubmit)
+</script>
+
+{% endblock content %}

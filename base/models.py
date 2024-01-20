@@ -71,3 +71,6 @@ class Likes(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE, related_name = 'user_likes')
     message = models.ForeignKey(Message, on_delete=models.CASCADE, related_name='message_likes')
     value = models.CharField(choices = LIKE_CHOICES, default = 'Like', max_length = 10)
+
+# class Token(models.Model):
+    # uid = models.UUIDField(unique= True)
