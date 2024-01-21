@@ -51,7 +51,7 @@
         e.preventDefault()
         let room = e.target.room.value.toUpperCase()
 
-        let response = await fetch(`/brainnest/get_token/?channel=${room}`)
+        let response = await fetch(`/brainroom/get_token/?channel=${room}`)
         let data = await response.json()
 
         let UID = data.uid
@@ -64,7 +64,7 @@
         sessionStorage.setItem('room', room)
         sessionStorage.setItem('name', name)
 
-        window.open('/brainnest/room/', '_self')
+        window.open('/brainroom/room/', '_self')
     }
 
     form.addEventListener('submit', handleSubmit)

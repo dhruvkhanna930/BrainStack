@@ -21,7 +21,7 @@ let joinAndDisplayLocalStream = async () => {
         await client.join(APP_ID, CHANNEL, TOKEN, UID)
     } catch(error) {
         console.error(error)
-        window.open('/brainnest/', '_self')
+        window.open('/brainroom/', '_self')
     }
 
     let member = await createMember()
@@ -83,7 +83,7 @@ let leaveAndRemoveLocalStream = async () => {
     //This is somewhat of an issue because if user leaves without actaull pressing leave button, it will not trigger
     
     deleteMember()
-    window.open('/brainnest/', '_self')
+    window.open('/brainroom/', '_self')
 }
 
 
@@ -111,7 +111,7 @@ let toggleMic = async (e) => {
 }
 
 let createMember = async () => {
-    let response = await fetch('/brainnest/create_member/', {
+    let response = await fetch('/brainroom/create_member/', {
         method:'POST',
         headers: {
             'Content-Type':'application/json'
@@ -124,14 +124,14 @@ let createMember = async () => {
 
 
 let getMember = async (user) => {
-    let response = await fetch(`/brainnest/get_member/?UID=${user.uid}&room_name=${CHANNEL}`)
+    let response = await fetch(`/brainroom/get_member/?UID=${user.uid}&room_name=${CHANNEL}`)
     let member = await response.json()
     return member
 }
 
 
 let deleteMember = async () => {
-    let response = await fetch('/brainnest/delete_member/', {
+    let response = await fetch('/brainroom/delete_member/', {
         method:'POST',
         headers: {
             'Content-Type':'application/json'
