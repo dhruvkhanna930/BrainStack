@@ -5,9 +5,13 @@
 <link rel="stylesheet" href="{% static 'styles/chatbot_css/chat.css' %}">
 <link rel="stylesheet" href="{% static 'styles/corner_bt.css' %}">
 <main class="layout layout--3">
-    <div class="container">
+    <div class="container" >
     <!-- Topics Start -->
-    {% include 'base/topics_component.html' %}
+    <div style="position: relative;">
+        <!-- <div style="position: fixed;"> -->
+            {% include 'base/topics_component.html' %}
+        <!-- </div> -->
+    </div>
     <!-- Topics End -->
 
     <!-- Room List Start -->
@@ -112,14 +116,14 @@
         </div>
     </div>
     <!-- Chatbox End -->
-    <div>
+    <div id="home-side-buttons">
         <a class="round-button" href="{% url 'bn-lobby' %}" id="btn-1">
             <img src="{% static 'images/icons/video-icon.png' %}" alt="Button Image" id="brainroom-img">
             <span id="btn-1-text">BrainRoom</span>
         </a>
         
     
-        <a href="#" class="round-button" id="btn-2">
+        <a href="{% url 'bs-home' %}" class="round-button" id="btn-2">
             <img src="{% static 'images/icons/share-icon.png' %}" alt="Button Image" id="brainroom-img">
             <span id="btn-2-text">BrainShare</span>
         </a>

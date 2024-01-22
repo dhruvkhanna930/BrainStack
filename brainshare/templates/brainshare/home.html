@@ -1,0 +1,137 @@
+{% extends 'main1.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
+
+<link rel="stylesheet" href="{% static 'styles/share_css/home.css' %}">
+
+<link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+
+<link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/filepond/4.30.3/filepond.min.js" integrity="sha512-AuMJiyTn/5k+gog21BWPrcoAC+CgOoobePSRqwsOyCSPo3Zj64eHyOsqDev8Yn9H45WUJmzbe9RaLTdFKkO0KQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+
+<script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script>
+
+<script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+
+    <div class="container">
+        <div class="layout__box">
+          <div class="layout__boxHeader">
+            <div class="layout__boxTitle">
+              <a href="{% url 'home' %}">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                  <title>arrow-left</title>
+                  <path
+                    d="M13.723 2.286l-13.723 13.714 13.719 13.714 1.616-1.611-10.96-10.96h27.625v-2.286h-27.625l10.965-10.965-1.616-1.607z">
+                  </path>
+                </svg>
+              </a>
+              <h3>
+                Brain Share
+              </h3>
+            </div>
+          </div>
+          <div class="layout__body">
+
+            <div class="form" id="brainshare-form">
+              <div class="form__group logo" style="text-align: center;">
+                <img id="logo" src="{% static 'images/icons/brainshare/undraw.svg' %}" style="width: 50%;"/>
+              </div>
+
+              <div class="form__group" style="font-size: 40px;">
+                <input type="file" class="my-pond mt-4" multiple name="filepond" />
+              </div>
+      
+              <div class="form__action">
+                <a class="btn btn--dark" href="{{request.META.HTTP_REFERER}}">Cancel</a>
+                
+                <div class="text-center">
+                    <button class="btn btn--main btn-success brainshare-upload" onclick="upload_file()">Upload File</button>
+                </div>               
+            </div>           
+          </div>
+        </div>
+
+        <div class="carad mt-3" id="btn" style="display: none;" >
+            <div class="card-bodqy">  
+                <div class="background">
+                    <div class="copy">
+                        <button onclick="copyClip()" class="clipboard">Click me to copy current Url</button>
+                        <p>Have you already clicked?</p>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+      </div>
+
+
+<script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
+
+<script>
+    FilePond.registerPlugin(
+        FilePondPluginImagePreview,
+    );
+
+    const pond = FilePond.create(
+        document.querySelector('.my-pond')
+    );
+
+    var url = null
+
+    function upload_file() {
+
+        var files = pond.getFiles()
+
+        var formdata = new FormData()
+
+        for (var i = 0; i < files.length; i++) {
+            formdata.append('files', files[i].file)
+        }
+
+        fetch('/brainshare/handle/', {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': "{{csrf_token}}"
+                },
+                body: formdata
+            }).then(res => res.json())
+            .then(result => {
+                console.log(result)
+
+                url = `http://127.0.0.1:8000/brainshare/download/${result.data.folder}`
+
+                if (url.length > 51) {
+                  document.getElementById('btn').style.display="block"
+                }
+                
+
+            })
+
+        }
+
+        function copyClip() {
+            console.log('dd')
+        
+            // navigator.clipboard.writeText(url);
+
+            var textarea = document.createElement('textarea');
+            textarea.value = url;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            
+
+            alert("Copied the text: " + url);
+        }
+
+</script>
+
+
+{% endblock content %}

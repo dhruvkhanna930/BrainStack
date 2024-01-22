@@ -1,0 +1,66 @@
+  /**
+ * FilePond Custom Styles
+ */
+ .filepond--drop-label {
+    color: #4c4e53;
+  }
+
+  .filepond--label-action {
+    -webkit-text-decoration-color: #babdc0;
+    text-decoration-color: #babdc0;
+  }
+
+  .filepond--panel-root {
+    border-radius: 2em;
+    background-color: #edf0f4;
+    height: 1em;
+  }
+
+  .filepond--item-panel {
+    background-color: #595e68;
+  }
+
+  .filepond--drip-blob {
+    background-color: #7f8a9a;
+  }
+
+  /**
+* Page Styles
+*/
+
+.background {
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.clipboard {
+    border: 0;
+    padding: 15px;
+    border-radius: 3px;
+    background: #696d97;
+    cursor: pointer;
+    color: #e1f6fb;
+    /* font-size: 16px; */
+    position: relative;
+    top: 0;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.clipboard:hover {
+    background: #71c6dd;
+    color: #3f4156;
+    font-weight: 500;
+}
+
+.copy{
+    text-align: center;
+}
+
+body .clipboard:hover {
+    top: 2px;
+}
+/* body p {
+font-weight: 700;
+} */

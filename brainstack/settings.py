@@ -38,8 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'rest_framework',
+
     'base.apps.BaseConfig',
-    'videoroom'
+    'videoroom',
+    'brainshare',
 ]
 
 
@@ -123,21 +126,27 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
+import os
 
+STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
-MEDIA_URL = '/images/' 
+
 # #also go and import in the urls file: 
 #   from django.conf import settings
 #   from django.conf.urls.static import static
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = [    #static files   
-    BASE_DIR / "static" ,
+    # BASE_DIR / "static" ,
+    os.path.join(BASE_DIR, 'static/')
 ]
 
-MEDIA_ROOT = BASE_DIR / 'static/images'  #where does the user uploaded content go to
+# MEDIA_ROOT = BASE_DIR / 'static/images'  #where does the user uploaded content go to
 
-# STATIC_ROOT = 
+MEDIA_ROOT =  os.path.join(BASE_DIR, 'static/images') 
+MEDIA_URL = '/images/' 
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -153,5 +162,4 @@ EMAIL_USE_TLS = True  # Use TLS/SSL for secure connections
 EMAIL_HOST_USER = 'brainstack930@gmail.com' 
 EMAIL_HOST_PASSWORD = 'tusfmxqddalmwykt' 
 
-BARD_API_URL = "https://api.bard.co/v2"
-BARD_API_KEY = "eAjL4pvA0jR4umFLkDR8UvEl8TXM3v-dCg3j_KpDo5z7jTkQdIBFGSdJHz9B32zaHGIW8A"
+

@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import JsonResponse
 import json
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
+
 
 from agora_token_builder import RtcTokenBuilder
 
@@ -66,7 +68,7 @@ def deleteMember(request):
     member.delete()
     return JsonResponse('Member deleted', safe=False)
  
-
+@login_required(login_url='login')
 def lobby(request):
     navbar = False
     context = {
@@ -74,6 +76,7 @@ def lobby(request):
     }
     return render(request, 'videoroom/lobby.html', context)
 
+@login_required(login_url='login')
 def room(request):
     navbar = False
     context = {
