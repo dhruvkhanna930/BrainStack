@@ -5,9 +5,13 @@
 <link rel="stylesheet" href="{% static 'styles/chatbot_css/chat.css' %}">
 <link rel="stylesheet" href="{% static 'styles/corner_bt.css' %}">
 <main class="layout layout--3">
-    <div class="container">
+    <div class="container" >
     <!-- Topics Start -->
-    {% include 'base/topics_component.html' %}
+    <div style="position: relative;">
+        <!-- <div style="position: fixed;"> -->
+            {% include 'base/topics_component.html' %}
+        <!-- </div> -->
+    </div>
     <!-- Topics End -->
 
     <!-- Room List Start -->
