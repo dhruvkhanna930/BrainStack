@@ -1,6 +1,16 @@
 {% extends 'main.html' %}
 
 {% block content %}
+<style>
+  .hide-scrollbar::-webkit-scrollbar {
+  display: none;
+  }
+
+  .hide-scrollbar {
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
+  }
+</style>
 
   <main class="profile-page layout layout--3">
     <div class="container">
@@ -40,7 +50,11 @@
             </h2>
           </div>
         </div>
-        {% include 'base/feed_component.html' %}
+        <div>
+          <div class="hide-scrollbar" style="overflow: scroll; height: 80vh;">
+            {% include 'base/feed_component.html' %}
+          </div>
+        </div>
       </div>
       <!-- Room List End -->
 

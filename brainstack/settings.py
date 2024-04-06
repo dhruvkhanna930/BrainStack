@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -159,7 +160,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'brainstack'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True  # Use TLS/SSL for secure connections
-EMAIL_HOST_USER = 'brainstack930@gmail.com' 
-EMAIL_HOST_PASSWORD = 'tusfmxqddalmwykt' 
-
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 

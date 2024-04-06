@@ -4,6 +4,17 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'styles/chatbot_css/chat.css' %}">
 <link rel="stylesheet" href="{% static 'styles/corner_bt.css' %}">
+<style>
+    .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+    }
+
+    .hide-scrollbar {
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
+    }
+</style>
+
 <main class="layout layout--3">
     <div class="container" >
     <!-- Topics Start -->
@@ -48,8 +59,9 @@
                 Create Room
             </a>
             </div>
-
-            {% include 'base/feed_component.html' %}
+            <div class="hide-scrollbar" style="overflow: scroll; height: 150vh;">
+                {% include 'base/feed_component.html' %}
+            </div>
 
         </div>
     <!-- Room List End -->

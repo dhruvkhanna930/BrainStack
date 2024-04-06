@@ -200,7 +200,9 @@ def home(request):
     else:
         rooms = Room.objects.all()
         room_messages = Message.objects.all( )[0:4]
-    topics = Topic.objects.all()[0:5]
+    # topics = Topic.objects.all()[0:5]
+    topics = Topic.objects.annotate(num_rooms=Count('room'))
+    topics = topics.order_by('-num_rooms')[0:5]
     room_count = rooms.count()  # .count method works faster than the len() method
     
     top_hosts = User.objects.annotate(num_rooms=Count('room__host')).order_by('-num_rooms')[:5]
@@ -415,8 +417,9 @@ def topicsPage(request):
     if q is not None:
         topics = Topic.objects.filter(name__icontains=q)
     else:
-        topics = Topic.objects.all()
-    
+        # topics = Topic.objects.all()
+        topics = Topic.objects.annotate(num_rooms=Count('room'))
+        topics = topics.order_by('-num_rooms')
     total_rooms = Room.objects.all().count()
     context = {
         'topics' : topics,

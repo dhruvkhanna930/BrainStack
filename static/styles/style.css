@@ -62,6 +62,15 @@ a {
   text-decoration: none;
 }
 
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
+}
+
 /*========== components ==========*/
 .container {
   max-width: 120rem;

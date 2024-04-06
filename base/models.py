@@ -73,4 +73,5 @@ class Likes(models.Model):
     value = models.CharField(choices = LIKE_CHOICES, default = 'Like', max_length = 10)
 
 # class Token(models.Model):
-    # uid = models.UUIDField(unique= True)
+#     uid = models.UUIDField(unique= True)
+#     token_id = models.CharField(max_length=30)
