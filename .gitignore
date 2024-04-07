@@ -1,0 +1,5 @@
+*.venv
+*.env
+bin/
+lib/
+*.sqlite3
