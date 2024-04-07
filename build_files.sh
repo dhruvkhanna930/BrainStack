@@ -1,2 +1,2 @@
-pip3 intsall -r requirements.txt
+pip intsall -r requirements.txt
 python3.9 manage.py collectstatic
