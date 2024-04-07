@@ -4,6 +4,7 @@
 
 echo "Building the project ..."
 python3.9 -m pip install -r requirements.txt
+python3.9 -m pip install django
 
 echo "Make migration..."
 python3.9 manage.py makemigrations --noinput
