@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-$ld8enbx&jusnp#nht0l5=i(4fti$8ly$ws$29$2lhe6-3!_&c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.vercel.app', '.now.sh', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -41,7 +41,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
 
-    'base.apps.BaseConfig',
+    'base',
     'videoroom',
     'brainshare',
 ]
@@ -88,8 +88,12 @@ WSGI_APPLICATION = 'brainstack.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'brainstack',
+        'USER' : 'postgres',
+        'PASSWORD' : os.environ.get('DB_PASSWORD'),
+        'HOST' : 'localhost',
+        'PORT' : 5432
     }
 }
 
@@ -136,7 +140,8 @@ STATIC_URL = '/static/'
 #   from django.conf import settings
 #   from django.conf.urls.static import static
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 
 STATICFILES_DIRS = [    #static files   
     # BASE_DIR / "static" ,

@@ -23,6 +23,7 @@ import google.generativeai as palm
 import os
 from dotenv import load_dotenv
 
+
 # Setting up the palmAPIServer
 load_dotenv()
 try:
@@ -118,7 +119,7 @@ def registerUser(request):
     return render(request, 'base/login-register.html', context)
 
 
-ForgotPasswordUser = User.objects.get(id = 1)
+# global ForgotPasswordUser = User.objects.get(id = 1)
 def forgot_password(request):
     if request.method == 'POST':
         email = request.POST.get('email')
