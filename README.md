@@ -14,9 +14,9 @@ Brainstack is a collaborative communication platform inspired by Discord. It pro
 
   ### [Design Report](https://github.com/dhruvkhanna930/BrainStack/blob/main/DesignReport.pdf)
 
-  ### [Feasibility Report](FeasibilityReport.pdf)
+  ### [Feasibility Report](https://github.com/dhruvkhanna930/BrainStack/blob/main/FeasibilityReport%20.pdf)
 
-  ### [Estimation Report](EstimationReport.pdf)
+  ### [Estimation Report](https://github.com/dhruvkhanna930/BrainStack/blob/main/EstimationReport.pdf)
 
 ## Setup
 
