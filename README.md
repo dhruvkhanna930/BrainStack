@@ -89,16 +89,16 @@ Follow these steps to set up the project locally:
 
 ## Screenshots
 <div align="center">
-    <img src="https://github.com/dhruvkhanna930/BrainStack/blob/main/ScreenShots/01_HomePage.png" alt="Photo 1" width="450"/>
-    <img src="https://github.com/dhruvkhanna930/BrainStack/blob/main/ScreenShots/02_UserProfile.png" alt="Photo 2" width="450"/>
-    <img src="https://github.com/dhruvkhanna930/BrainStack/blob/main/ScreenShots/03_RoomPage.png" alt="Photo 3" width="450"/>
-    <img src="https://github.com/dhruvkhanna930/BrainStack/blob/main/ScreenShots/04_VideoRoom.png" alt="Photo 4" width="450"/>
-    <img src="https://github.com/dhruvkhanna930/BrainStack/blob/main/ScreenShots/05_VideoRoomDashboard.png" alt="Photo 5" width="450"/>
-    <img src="https://github.com/dhruvkhanna930/BrainStack/blob/main/ScreenShots/06_FIleShareDashboard.png" alt="Photo 6" width="450"/>
-    <img src="https://github.com/dhruvkhanna930/BrainStack/blob/main/ScreenShots/07_DownloadFilePage.png" alt="Photo 7" width="450"/>
-    <img src="https://github.com/dhruvkhanna930/BrainStack/blob/main/ScreenShots/08_CreateRoom.png" alt="Photo 8" width="450"/>
-    <img src="https://github.com/dhruvkhanna930/BrainStack/blob/main/ScreenShots/09_BrowseTopics.png" alt="Photo 9" width="450"/>
-    <img src="https://github.com/dhruvkhanna930/BrainStack/blob/main/ScreenShots/10_EditPprofile.png" alt="Photo 10" width="450"/>
+    <img src="https://github.com/dhruvkhanna930/BrainStack/blob/main/ScreenShots/01_HomePage.png" alt="Photo 1" width="400"/>
+    <img src="https://github.com/dhruvkhanna930/BrainStack/blob/main/ScreenShots/02_UserProfile.png" alt="Photo 2" width="400"/>
+    <img src="https://github.com/dhruvkhanna930/BrainStack/blob/main/ScreenShots/03_RoomPage.png" alt="Photo 3" width="400"/>
+    <img src="https://github.com/dhruvkhanna930/BrainStack/blob/main/ScreenShots/04_VideoRoom.png" alt="Photo 4" width="400"/>
+    <img src="https://github.com/dhruvkhanna930/BrainStack/blob/main/ScreenShots/05_VideoRoomDashboard.png" alt="Photo 5" width="400"/>
+    <img src="https://github.com/dhruvkhanna930/BrainStack/blob/main/ScreenShots/06_FIleShareDashboard.png" alt="Photo 6" width="400"/>
+    <img src="https://github.com/dhruvkhanna930/BrainStack/blob/main/ScreenShots/07_DownloadFilePage.png" alt="Photo 7" width="400"/>
+    <img src="https://github.com/dhruvkhanna930/BrainStack/blob/main/ScreenShots/08_CreateRoom.png" alt="Photo 8" width="400"/>
+    <img src="https://github.com/dhruvkhanna930/BrainStack/blob/main/ScreenShots/09_BrowseTopics.png" alt="Photo 9" width="400"/>
+    <img src="https://github.com/dhruvkhanna930/BrainStack/blob/main/ScreenShots/10_EditPprofile.png" alt="Photo 10" width="400"/>
 </div>
 
 
